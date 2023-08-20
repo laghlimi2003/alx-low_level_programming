@@ -1,17 +1,20 @@
 #include "main.h"
 
 /**
- * _islower - check if the given character is lower case.
- * @c: character to test.
+ * _islower - function ti chek if
+ *            character is lowercase
+ * @c: checks input of function
  *
- * Return: 1 (True) else 0 (False)
+ * Return: returns 1 if 'c' is lowercase
+ *         otherwise always 0 (Success)          
  */
-int _islower(char c)
+
+int _islower(int c)
 {
-	if (c >= 'a' && c <= 'z')
-	{
+	if (c >= '97' && c <= '122')
+{
 		return (1);
-	}
+	
 	return (0);
 }
 
