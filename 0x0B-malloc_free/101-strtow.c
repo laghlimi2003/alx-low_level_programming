@@ -25,6 +25,7 @@ int number(char *str)
 	}
 	return (num);
 }
+
 /**
  * free_everything - frees the memory
  * @string: pointer values being passed for freeing
@@ -32,8 +33,8 @@ int number(char *str)
  */
 void free_everything(char **string, int i)
 {
-	for (; i > 0;)
-		free(string[--i]);
+	for (; i > 0; i--)
+		free(string[i - 1]);
 	free(string);
 }
 
@@ -47,28 +48,25 @@ char **strtow(char *str)
 	int total_words = 0, b = 0, c = 0, length = 0;
 	char **words, *found_word;
 
-	if (str == 0 || *str == 0)
+	if (str == NULL || *str == '\0')
 		return (NULL);
 	total_words = number(str);
 	if (total_words == 0)
 		return (NULL);
 	words = malloc((total_words + 1) * sizeof(char *));
-	if (words == 0)
+	if (words == NULL)
 		return (NULL);
-	for (; *str != '\0' &&  b < total_words;)
+	while (*str != '\0' && b < total_words)
 	{
 		if (*str == ' ')
 			str++;
 		else
 		{
 			found_word = str;
-			for (; *str != ' ' && *str != '\0';)
-			{
+			for (; *str != ' ' && *str != '\0'; str++)
 				length++;
-				str++;
-			}
 			words[b] = malloc((length + 1) * sizeof(char));
-			if (words[b] == 0)
+			if (words[b] == NULL)
 			{
 				free_everything(words, b);
 				return (NULL);
@@ -80,8 +78,12 @@ char **strtow(char *str)
 				c++;
 			}
 			words[b][c] = '\0';
-			b++; c = 0; length = 0; str++;
+			b++;
+			c = 0;
+			length = 0;
+			str++;
 		}
 	}
 	return (words);
 }
+
